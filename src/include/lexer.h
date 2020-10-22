@@ -1,5 +1,5 @@
-#ifndef _GUM_LEXER_H_
-#define _GUM_LEXER_H_
+#ifndef _LEXER_H_
+#define _LEXER_H_
 
 #include "token.h"
 

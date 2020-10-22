@@ -4,6 +4,13 @@
 #include <string.h>
 #include <ctype.h>
 
+#define EQUAL  '='
+#define SEMI   ';'
+#define LPAREN '('
+#define RPAREN ')'
+#define COMMA  ','
+
+
 lexer_T*
 init_lexer(char* contents) 
 {
@@ -56,30 +63,35 @@ lexer_get_next_token(lexer_T* lexer)
 
         switch (lexer->c) 
         {
-            case '=': return lexer_advance_with_token(lexer, init_token(
+            case EQUAL : return lexer_advance_with_token(lexer, init_token(
                                   TOKEN_EQUALS,
                                   lexer_get_current_char_as_string(lexer)
                                   )); break;
 
-            case ';': return lexer_advance_with_token(lexer, init_token(
+            case SEMI : return lexer_advance_with_token(lexer, init_token(
                                   TOKEN_SEMI,
                                   lexer_get_current_char_as_string(lexer)
                                   )); break;
 
-            case '(': return lexer_advance_with_token(lexer, init_token(
+            case LPAREN : return lexer_advance_with_token(lexer, init_token(
                                   TOKEN_LPAREN,
                                   lexer_get_current_char_as_string(lexer)
                                   )); break;
 
-            case ')': return lexer_advance_with_token(lexer, init_token(
+            case RPAREN : return lexer_advance_with_token(lexer, init_token(
                                   TOKEN_RPAREN,
+                                  lexer_get_current_char_as_string(lexer)
+                                  )); break;
+
+            case COMMA : return lexer_advance_with_token(lexer, init_token(
+                                  TOKEN_COMMA,
                                   lexer_get_current_char_as_string(lexer)
                                   )); break;
 
         }
     }
 
-    return (void*)0;
+    return init_token(TOKEN_EOF, "\0");
 }
 
 token_T*
