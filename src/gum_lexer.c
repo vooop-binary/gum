@@ -1,6 +1,5 @@
 #include "include/gum_lexer.h"
 #include "include/token.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
