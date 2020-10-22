@@ -9,6 +9,12 @@ let name = "John Doe";
 format(name);
 ```
 
-this example is what I hope the final project will be like.
+this example is what I hope the final project will be like. 
+
+# TODO
+
++ implement a visitor
++ implement a better parser
++ implement math
 
 
