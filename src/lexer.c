@@ -1,4 +1,4 @@
-#include "include/gum_lexer.h"
+#include "include/lexer.h"
 #include "include/token.h"
 #include <stdlib.h>
 #include <string.h>
@@ -119,8 +119,6 @@ lexer_collect_id(lexer_T* lexer)
 
         lexer_advance(lexer);
     }
-
-    lexer_advance(lexer);
 
     return init_token(TOKEN_ID, value);
 }

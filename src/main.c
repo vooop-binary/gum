@@ -3,7 +3,7 @@
  * licence - GPL licence */
 
 #include <stdio.h>
-#include "include/gum_lexer.h"
+#include "include/lexer.h"
 #include "include/token.h"
 
 int
