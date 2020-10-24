@@ -140,7 +140,7 @@ parser_parse_function_call(parser_T* parser)
             function_call->function_call_arguements_size * sizeof(
                struct AST_STRUCT*)
             );
-      function_call->compound_value[
+      function_call->function_call_arguements[
          function_call->function_call_arguements_size-1] = ast_expr;
    }
 

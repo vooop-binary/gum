@@ -12,10 +12,9 @@ int
 main(int argv, char* argc[])
 {
     lexer_T* lexer = init_lexer(
-        "let name = \"Hello ,World\";\n"
-        "let jk = \"JK :D\";\n "
-        "format(jk);"
-        "format(name);\n"
+        "let name = \"john\";\n"
+        "let othername = \"jane\";\n "
+        "format(othername, name);\n"
     );
 
     parser_T* parser = init_parser(lexer);
