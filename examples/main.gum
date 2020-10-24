@@ -1,3 +1,5 @@
-let name = "John Doe"; 
+let name = "hello"; 
+let anotherVar = "another one";
 
-format(name);
+format(name, "hello");
+format(anotherVar);
