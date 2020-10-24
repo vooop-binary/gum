@@ -10,7 +10,6 @@
 #define RPAREN ')'
 #define COMMA  ','
 
-
 lexer_T*
 init_lexer(char* contents) 
 {

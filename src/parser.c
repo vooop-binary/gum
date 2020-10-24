@@ -48,6 +48,8 @@ parser_parse_statement(parser_T* parser)
    {
       case TOKEN_ID: return parser_parse_id(parser);
    }
+
+   return init_ast(AST_NULL);
 }
 
 AST_T*
@@ -58,6 +60,7 @@ parser_parse_statements(parser_T* parser)
 
    AST_T* ast_statement = parser_parse_statement(parser);
    compound->compound_value[0] = ast_statement;
+   ++compound->compound_size;
 
    while (parser->current_token->type == TOKEN_SEMI)
    {
@@ -65,13 +68,18 @@ parser_parse_statements(parser_T* parser)
       parser_eat(parser, TOKEN_SEMI);
 
       AST_T* ast_statement = parser_parse_statement(parser);
-      ++compound->compound_size;
+      
+      if (ast_statement)
+      {
+         ++compound->compound_size;
 
-      compound->compound_value = realloc(
-            compound->compound_value,
-            compound->compound_size * sizeof(struct AST_STRUCT*)
-            );
-      compound->compound_value[compound->compound_size-1] = ast_statement;
+         compound->compound_value = realloc(
+               compound->compound_value,
+               compound->compound_size * sizeof(struct AST_STRUCT*)
+               );
+
+         compound->compound_value[compound->compound_size-1] = ast_statement;
+      }
    }
 
    return compound;
@@ -85,14 +93,18 @@ parser_parse_expr(parser_T* parser)
       case TOKEN_STRING : return parser_parse_string(parser);
       case TOKEN_ID : return parser_parse_id(parser);
    }
+  
+   return init_ast(AST_NULL);
 }
 
+/* TODO: implement factors */
 AST_T*
 parser_parse_factor(parser_T* parser)
 {
 
 }
 
+/* TODO: implement terms */
 AST_T*
 parser_parse_term(parser_T* parser)
 {
@@ -103,15 +115,17 @@ AST_T*
 parser_parse_function_call(parser_T* parser)
 {
    AST_T* function_call = init_ast(AST_FUNCTION_CALL);
-   parser_eat(parser, TOKEN_LPAREN);
 
    function_call->function_call_name = parser->prev_token->value;
+
+   parser_eat(parser, TOKEN_LPAREN);
 
    function_call->function_call_arguements = calloc(
          1, sizeof(struct AST_STRUCT*));
 
    AST_T* ast_expr = parser_parse_expr(parser);
    function_call->function_call_arguements[0] = ast_expr;
+   ++function_call->function_call_arguements_size;
 
    while (parser->current_token->type == TOKEN_COMMA)
    {
