@@ -20,6 +20,9 @@ AST_T*
 visitor_visit_variable_defination(visitor_T*, AST_T*);
 
 AST_T*
+visitor_visit_function_defination(visitor_T*, AST_T*);
+
+AST_T*
 visitor_visit_variable(visitor_T*, AST_T*);
 
 AST_T*

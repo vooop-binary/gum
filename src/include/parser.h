@@ -43,6 +43,9 @@ AST_T*
 parser_parse_variable_defination(parser_T*);
 
 AST_T*
+parser_parse_function_defination(parser_T*);
+
+AST_T*
 parser_parse_variable(parser_T*);
 
 AST_T*

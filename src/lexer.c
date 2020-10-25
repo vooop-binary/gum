@@ -6,8 +6,10 @@
 
 #define EQUAL  '='
 #define SEMI   ';'
-#define LPAREN '('
 #define RPAREN ')'
+#define RBRACE '}'
+#define LPAREN '('
+#define LBRACE '{'
 #define COMMA  ','
 
 lexer_T*
@@ -77,8 +79,18 @@ lexer_get_next_token(lexer_T* lexer)
                                   lexer_get_current_char_as_string(lexer)
                                   )); break;
 
+            case LBRACE : return lexer_advance_with_token(lexer, init_token(
+                                  TOKEN_LBRACE,
+                                  lexer_get_current_char_as_string(lexer)
+                                  )); break;
+
             case RPAREN : return lexer_advance_with_token(lexer, init_token(
                                   TOKEN_RPAREN,
+                                  lexer_get_current_char_as_string(lexer)
+                                  )); break;
+
+            case RBRACE : return lexer_advance_with_token(lexer, init_token(
+                                  TOKEN_RBRACE,
                                   lexer_get_current_char_as_string(lexer)
                                   )); break;
 

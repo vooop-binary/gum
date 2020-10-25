@@ -153,7 +153,7 @@ parser_parse_function_call(parser_T* parser)
 AST_T*
 parser_parse_variable_defination(parser_T* parser)
 {
-   parser_eat(parser, TOKEN_ID); /* let */
+   parser_eat(parser, TOKEN_ID); /* defvar */
    char* variable_defination_name = parser->current_token->value;
    parser_eat(parser, TOKEN_ID); /* variable name */
    parser_eat(parser, TOKEN_EQUALS);
@@ -166,6 +166,25 @@ parser_parse_variable_defination(parser_T* parser)
 
    return variable_defination;
 } 
+
+AST_T*
+parser_parse_function_defination(parser_T* parser)
+{
+    AST_T* ast = init_ast(AST_FUNCTION_DEFINATION);
+    parser_eat(parser, TOKEN_ID); /* defun */
+    char* function_name = parser->current_token->value;
+    parser_eat(parser, TOKEN_ID);
+    parser_eat(parser, TOKEN_LPAREN);
+    parser_eat(parser, TOKEN_RPAREN);
+    parser_eat(parser, TOKEN_LBRACE);
+
+    ast->funtion_defination_body = parser_parse_statements(parser);
+
+    parser_eat(parser, TOKEN_RBRACE);
+
+    return ast;
+}
+
 AST_T*
 parser_parse_variable(parser_T* parser)
 {
@@ -197,10 +216,14 @@ parser_parse_string(parser_T* parser)
 AST_T*
 parser_parse_id(parser_T* parser)
 {
-   if (strcmp(parser->current_token->value, "let") == 0)
+   if (strcmp(parser->current_token->value, "defvar") == 0)
    {
       parser_parse_variable_defination(parser);
-   } 
+   }
+   else if (strcmp(parser->current_token->value, "defun") == 0)
+   {
+      parser_parse_function_defination(parser);
+   }
    else 
    {
       return parser_parse_variable(parser);

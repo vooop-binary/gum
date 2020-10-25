@@ -10,7 +10,9 @@ typedef struct TOKEN_STRUCT
         TOKEN_STRING,
         TOKEN_SEMI,
         TOKEN_LPAREN,
+        TOKEN_LBRACE,
         TOKEN_RPAREN,
+        TOKEN_RBRACE,
         TOKEN_COMMA,
         TOKEN_EOF,
     } type;

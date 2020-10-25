@@ -1,5 +1,11 @@
-let name = "hello"; 
-let anotherVar = "another one";
+defvar hello = "Hello World";
 
-format(name, "hello");
-format(anotherVar);
+format(hello);
+
+defun dosomething()
+{
+    format("done something");
+}
+
+dosomething();
+

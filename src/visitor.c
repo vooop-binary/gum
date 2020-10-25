@@ -44,6 +44,11 @@ visitor_visit(visitor_T* visitor, AST_T* node)
                                           node);
                                     break;
 
+      case AST_FUNCTION_DEFINATION: return 
+                                    visitor_visit_function_defination(visitor, 
+                                          node);
+                                    break;
+
       case AST_VARIABLE:            return 
                                     visitor_visit_variable(visitor, node);
                                     break;
@@ -96,6 +101,13 @@ visitor_visit_variable_defination(visitor_T* visitor, AST_T* node)
 }
 
 AST_T*
+visitor_visit_function_defination(visitor_T* visitor, AST_T* node)
+{
+    printf("defun sucessful\n");
+    return node;
+}
+
+AST_T*
 visitor_visit_variable(visitor_T* visitor, AST_T* node)
 {
    for (int i = 0; i < visitor->variable_defination_size; ++i)
@@ -108,7 +120,7 @@ visitor_visit_variable(visitor_T* visitor, AST_T* node)
       }
    }
 
-   printf("Undefined Variable `%s`\n", node->function_call_name);
+   printf("undefined variable `%s`\n", node->variable_name);
 
    return node;
 }
